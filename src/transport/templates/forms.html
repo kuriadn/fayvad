@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+{% block title %}{{ block.super }} {{ data.0.heading }} {% endblock %}
+{% block styles %}
+  {{block.super}}
+  <link href="{% static 'site/css/nav.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+{% block navbar-left %}
+  {% include "_navbar.html" with active_link="analysis" %}
+{% endblock %}
+
+{% block navbar-right %}
+  {% if not user.is_authenticated %}
+<a class="btn btn-default" href="{% url 'accounts:login' %}" role="button">Log in</a>
+  {% else %}
+    {{ block.super }}
+  {% endif %}
+{% endblock %}
+
+{% block container %}
+{% include "_an_sidenav.html" with active_link="dashboard" %}
+<div class="main">
+<div class="container profile-head">
+  <div class="row text-center">
+    <div class="col-sm-12">
+      <h1>PAYMENT ANALYSIS</h1>  
+    </div>
+  </div>
+</div>
+<div class="container profile-body">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#monthpay"><i class="fa fa-dollar fa-lg"></i> 
+                            ALL PAYMENTS FOR PARTICULAR MONTH OF A PARTICULAR YEAR</a>
+                        </h4>
+                    </div>
+                    <div id="monthpay" class="panel-collapse collapse in">
+                      <div class="panel-body">
+                         <div class="row">
+                            <div class="col-sm-12">
+                              <table class="table">
+                                <form method="POST" class="post-form" id='my_form'>
+                                  {% csrf_token %}
+                                  <tr>
+                                    {% for field in forms.0 %}
+                                    <td>{{field.label}}</td><td>{% render_field field class="form-control" %}</td>
+                                    {% endfor %}
+                                  <td><button type="submit" class="save btn btn-primary"><span class="glyphicon glyphicon-filter"></span>Retrieve Payments</button></td>
+                                  </tr>
+                                 </form> 
+                              </table>  
+                            </div>
+                         </div>
+                       </div>
+                     </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#periodpay"><i class="fa fa-dollar fa-lg"></i> 
+                            ALL PAYMENTS SPANNING DURATION OF INTEREST</a>
+                        </h4>
+                    </div>
+                    <div id="periodpay" class="panel-collapse collapse">
+                        <div class="panel-body">
+                         <div class="row">
+                            <div class="col-sm-12">
+                              <table class="table">
+                                <form method="POST" class="post-form" id='my_form'>
+                                  {% csrf_token %}
+                                  <tr>
+                                    {% for field in forms.1 %}
+                                    <td>{{field.label}}</td><td>{% render_field field class="form-control" %}</td>
+                                    {% endfor %}
+                                  <td><button type="submit" class="save btn btn-primary"><span class="glyphicon glyphicon-filter"></span>Retrieve Payments</button></td>
+                                  </tr>
+                                 </form> 
+                              </table>  
+                            </div>
+                         </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#termpay"><i class="fa fa-dollar fa-lg"></i> 
+                            TRANSPORT PAYMENTS FOR PARTICULAR TERM</a>
+                        </h4>
+                    </div>
+                    <div id="termpay" class="panel-collapse collapse">
+                        <div class="panel-body">
+                         <div class="row">
+                            <div class="col-sm-12">
+                              <table class="table">
+                                <form method="POST" class="post-form" id='my_form'>
+                                  {% csrf_token %}
+                                  <tr>
+                                    {% for field in forms.2 %}
+                                    <td>{{field.label}}</td><td>{% render_field field class="form-control" %}</td>
+                                    {% endfor %}
+                                  <td><button type="submit" class="save btn btn-primary"><span class="glyphicon glyphicon-filter"></span>Retrieve Payments</button></td>
+                                  </tr>
+                                 </form> 
+                              </table>  
+                            </div>
+                         </div>  
+                        </div>
+                     </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#sumpay"><i class="fa fa-dollar fa-lg"></i> 
+                            TRANSPORT PAYMENT SUMMARIES FOR PARTICULAR TERM</a>
+                        </h4>
+                    </div>
+                    <div id="sumpay" class="panel-collapse collapse">
+                        <div class="panel-body">
+                         <div class="row">
+                            <div class="col-sm-12">
+                              <table class="table">
+                                <form method="POST" class="post-form" id='my_form'>
+                                  {% csrf_token %}
+                                  <tr>
+                                    {% for field in forms.3 %}
+                                    <td>{{field.label}}</td><td>{% render_field field class="form-control" %}</td>
+                                    {% endfor %}
+                                  <td><button type="submit" class="save btn btn-primary"><span class="glyphicon glyphicon-filter"></span>Retrieve Payments</button></td>
+                                  </tr>
+                                 </form> 
+                              </table>  
+                            </div>
+                        </div>  
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+ </div>
+ {% block footer %} 
+   {% include "_footer.html" %}
+ {% endblock %}
+</div>
+
+
+{% endblock %}
+
+{% block scripts %}
+  <script src="{% static 'js/nav.js' %}"></script>
+{% endblock %}
+

@@ -1,0 +1,258 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ block.super }}About{% endblock %}
+{% block styles %}
+  {{block.super}}
+  <link href="{% static 'site/css/nav.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block navbar-left %}
+  {% include "_navbar.html" with active_link="common" %}
+{% endblock %}
+
+<!-- Benefits of the Django application -->
+{% block container %}
+{% include "_sidenav.html" with active_link="dashboard" %}
+<div class="main">
+  <div class="container profile-head">
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <h1>DATA MANAGEMENT PORTAL</h1>
+      </div>
+    </div>
+  </div>
+  <div class="container profile-body"">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#common_acc"><i class="fa fa-globe fa-lg"></i> 
+                            MANAGE COMMON DATA</a>
+                        </h4>
+                    </div>
+                    <div id="common_acc" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                          <div class="row">
+                            <div class="col-sm-3">
+                              <div class="well well-lg  text-center"><h3><strong><a href="{% url 'common:position_list' %}">Positions</a></strong></h3></div> 
+                            </div>  
+                            <div class="col-sm-3">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'common:staff_list' %}">Staff</a></strong></h3></div> 
+                            </div>  
+                            <div class="col-sm-3">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'common:driver_list' %}">Drivers</a></strong></h3></div> 
+                            </div>  
+                            <div class="col-sm-3">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'common:vehicle_list' %}">Vehicles</a></strong></h3></div> 
+                            </div>  
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-4">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'common:paymode_list' %}">Payment Modes</a></strong></h3></div> 
+                            </div>  
+                            <div class="col-sm-4">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'common:expensetype_list' %}">Expense Types</a></strong></h3></div> 
+                            </div>  
+                            <div class="col-sm-4">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'common:expense_list' %}">Expenses</a></strong></h3></div> 
+                            </div>  
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-4">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'common:trip_list' %}">Trips</a></strong></h3></div> 
+                            </div>  
+                            <div class="col-sm-4">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'common:add_expenses' %}">Bulk Expenses</a></strong></h3></div> 
+                            </div>  
+                            <div class="col-sm-4">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'common:add_trips' %}">Bulk Trips</a></strong></h3></div> 
+                            </div>  
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#transport_acc"><i class="fa fa-bus fa-lg"></i>
+                            MANAGE SCHOOL TRANSPORT DATA</a>
+                        </h4>
+                    </div>
+                    <div id="transport_acc" class="panel-collapse collapse">
+                        <div class="panel-body">
+                          <div class="row">
+                            <div class="col-sm-3">
+                              <div class="well well-lg  text-center"><h3><strong><a href="{% url 'transport:term_list' %}">Terms</a></strong></h3></div> 
+                            </div>  
+                            <div class="col-sm-3">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'transport:parent_list' %}">Parents</a></strong></h3></div> 
+                            </div>  
+                            <div class="col-sm-3">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'transport:zone_list' %}">Zones</a></strong></h3></div> 
+                            </div>  
+                            <div class="col-sm-3">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'transport:estate_list' %}">Estates</a></strong></h3></div> 
+                            </div>  
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-4">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'transport:pupil_list' %}">Pupils</a></strong></h3></div> 
+                            </div>  
+                            <div class="col-sm-4">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'transport:rate_list' %}">Rates</a></strong></h3></div> 
+                            </div>  
+                            <div class="col-sm-4">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'transport:payment_list' %}">Payments</a></strong></h3></div> 
+                            </div>  
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-4">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'transport:estate_pupil_list' %}">Estate Pupils</a></strong></h3></div> 
+                            </div>  
+                            <div class="col-sm-4">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'transport:term_pupil_list' %}">Term Pupils</a></strong></h3></div> 
+                            </div>  
+                            <div class="col-sm-4">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'transport:add_pupils' %}">Bulk Pupils</a></strong></h3></div> 
+                            </div>  
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-4">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'transport:add_rates' %}">Bulk Rates</a></strong></h3></div> 
+                            </div>  
+                            <div class="col-sm-4">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'transport:add_est_pupils' %}">Bulk Estate Pupils</a></strong></h3></div> 
+                            </div>  
+                            <div class="col-sm-4">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'transport:add_payments' %}">Bulk Payments</a></strong></h3></div> 
+                            </div>  
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#driving_acc"><i class="fa fa-life-saver fa-lg"></i>
+                            MANAGE DRIVING SCHOOL DATA</a>
+                        </h4>
+                    </div>
+                    <div id="driving_acc" class="panel-collapse collapse">
+                        <div class="panel-body">
+                          <div class="row">
+                            <div class="col-sm-3">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'driving:student_list' %}">Students</a></strong></h3></div> 
+                            </div>  
+                            <div class="col-sm-3">
+                              <div class="well well-lg  text-center"><h3><strong><a href="{% url 'driving:class_list' %}">Classes</a></strong></h3></div> 
+                            </div>  
+                            <div class="col-sm-3">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'driving:tutor_list' %}">Tutors</a></strong></h3></div> 
+                            </div>  
+                            <div class="col-sm-3">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'driving:period_list' %}">Periods</a></strong></h3></div> 
+                            </div>  
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-3">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'driving:rate_list' %}">Rates</a></strong></h3></div> 
+                            </div>  
+                            <div class="col-sm-3">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'driving:attendance_list' %}">Class Attendance</a></strong></h3></div> 
+                            </div>  
+                            <div class="col-sm-3">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'driving:payment_list' %}">Payments</a></strong></h3></div> 
+                            </div>  
+                            <div class="col-sm-3">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'driving:license_list' %}">licenses</a></strong></h3></div> 
+                            </div>  
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'driving:branch_list' %}">Branches</a></strong></h3></div> 
+                            </div>  
+                            <div class="col-sm-6">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'driving:stud_enrol_list' %}">Students Enrolment</a></strong></h3></div> 
+                            </div>  
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-4">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'driving:discharge_list' %}">Discharges</a></strong></h3></div> 
+                            </div>  
+                            <div class="col-sm-4">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'driving:exambooking_list' %}">Exam Bookings</a></strong></h3></div> 
+                            </div>  
+                            <div class="col-sm-4">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'driving:add_payments' %}">Bulk Payments</a></strong></h3></div> 
+                            </div>  
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-4">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'driving:add_rates' %}">Bulk Rates</a></strong></h3></div> 
+                            </div>  
+                            <div class="col-sm-4">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'driving:add_attendance' %}">Bulk Class Attendance</a></strong></h3></div> 
+                            </div>  
+                            <div class="col-sm-4">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'driving:add_licenses' %}">Bulk licenses</a></strong></h3></div> 
+                            </div>  
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'driving:add_discharges' %}">Bulk Discharges</a></strong></h3></div> 
+                            </div>  
+                            <div class="col-sm-6">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'driving:add_exam_bookings' %}">Bulk Exam Bookings</a></strong></h3></div> 
+                            </div>  
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#rent_acc"><i class="fa fa-home fa-lg"></i> 
+                            MANAGE RENTAL BUSINESS DATA</a>
+                        </h4>
+                    </div>
+                    <div id="rent_acc" class="panel-collapse collapse">
+                        <div class="panel-body">
+                          <div class="row">
+                            <div class="col-sm-4">
+                              <div class="well well-lg  text-center"><h3><strong><a href="{% url 'rent:tenant_list' %}">Tenants</a></strong></h3></div> 
+                            </div>  
+                            <div class="col-sm-4">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'rent:room_list' %}">Rooms</a></strong></h3></div> 
+                            </div>  
+                            <div class="col-sm-4">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'rent:rent_regime_list' %}">Rent Regimes</a></strong></h3></div> 
+                            </div>  
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-4">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'rent:roomtenant_list' %}">Room Tenants</a></strong></h3></div> 
+                            </div>  
+                            <div class="col-sm-4">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'rent:payment_list' %}">Payments</a></strong></h3></div> 
+                            </div>  
+                            <div class="col-sm-4">
+                              <div class="well well-lg text-center"><h3><strong><a href="{% url 'rent:add_room_tenants' %}">Bulk Room Tenants</a></strong></h3></div> 
+                            </div>  
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+    {% block footer %}
+      {% include "_footer.html" %}
+    {% endblock %}
+</div>
+{% endblock container %}

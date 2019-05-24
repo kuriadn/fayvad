@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% load fayvad %}
+
+{% block title %}{{ block.super }} { } {% endblock %}
+
+{% block navbar-left %}
+  {% include "_navbar.html" with active_link="terms" %}
+{% endblock %}
+
+{% block navbar-right %}
+  {% if not user.is_authenticated %}
+<a class="btn btn-default" href="{% url 'accounts:login' %}" role="button">Log in</a>
+  {% else %}
+    {{ block.super }}
+  {% endif %}
+{% endblock %}
+
+{% block container %}
+<div class="container profile-head">
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <h1>Pupil Arrears :: [{{data}}]</h1>
+      </div>
+  </div>
+</div>
+
+  <div class="row">
+    <div class="col-sm-12">
+    <table class="table">
+      <tbody>
+        <form method="POST">
+          <td> Terms </td><td>
+          <select name="item_id">
+            { }
+              <option value="{ }">{ }</option>
+            { }
+          </select></td>
+        </form>     
+      </tbody>      
+    </table>
+    </div>
+  </div>
+
+
+    {% endblock %}

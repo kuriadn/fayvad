@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+{% block title %}{{ block.super }} {{ data.0.heading }} {% endblock %}
+{% block styles %}
+  {{block.super}}
+  <link href="{% static 'site/css/nav.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+{% block navbar-left %}
+  {% include "_navbar.html" with active_link="analysis" %}
+{% endblock %}
+
+{% block navbar-right %}
+  {% if not user.is_authenticated %}
+<a class="btn btn-default" href="{% url 'accounts:login' %}" role="button">Log in</a>
+  {% else %}
+    {{ block.super }}
+  {% endif %}
+{% endblock %}
+
+{% block container %}
+{% include "_an_sidenav.html" with active_link="debts" %}
+<div class="main">
+<div class="container profile-head">
+  <div class="row text-center">
+    <div class="col-sm-12">
+      <h1>DEBTS AND ARREARS ANALYSIS</h1>  
+    </div>
+  </div>
+</div>
+<div class="container profile-body">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#pupildetails"><i class="fa fa-dollar fa-lg"></i> 
+                            PUPIL DETAILED REPORT - PAYMENTS AND ARREARS</a>
+                        </h4>
+                    </div>
+                    <div id="pupildetails" class="panel-collapse collapse in">
+                      <div class="panel-body">
+                         <div class="row">
+                            <div class="col-sm-12">
+                              <table class="table">
+                                <form method="POST" class="post-form" id='pup_form'>
+                                  {% csrf_token %}
+                                  <tr>
+                                    {% for field in forms.0 %}
+                                    <td>{{field.label}}</td><td>{% render_field field class="form-control" %}</td>
+                                    {% endfor %}
+                                  <td><button type="submit" class="save btn btn-primary"><span class="glyphicon glyphicon-filter"></span>Get Pupil Details</button></td>
+                                  </tr>
+                                 </form> 
+                              </table>  
+                            </div>
+                         </div>
+                       </div>
+                     </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#studetails"><i class="fa fa-dollar fa-lg"></i> 
+                            STUDENT DETAILED REPORT - PAYMENTS AND ARREARS</a>
+                        </h4>
+                    </div>
+                    <div id="studetails" class="panel-collapse collapse">
+                      <div class="panel-body">
+                         <div class="row">
+                            <div class="col-sm-12">
+                              <table class="table">
+                                <form method="POST" class="post-form" id='stu_form'>
+                                  {% csrf_token %}
+                                  <tr>
+                                    {% for field in forms.1 %}
+                                    <td>{{field.label}}</td><td>{% render_field field class="form-control" %}</td>
+                                    {% endfor %}
+                                  <td><button type="submit" class="save btn btn-primary"><span class="glyphicon glyphicon-filter"></span>Get Student Details</button></td>
+                                  </tr>
+                                 </form> 
+                              </table>  
+                            </div>
+                         </div>
+                       </div>
+                     </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#tendetails"><i class="fa fa-dollar fa-lg"></i> 
+                            TENANT DETAILED REPORT - PAYMENTS AND ARREARS</a>
+                        </h4>
+                    </div>
+                    <div id="tendetails" class="panel-collapse collapse">
+                      <div class="panel-body">
+                         <div class="row">
+                            <div class="col-sm-12">
+                              <table class="table">
+                                <form method="POST" class="post-form" id='ten_form'>
+                                  {% csrf_token %}
+                                  <tr>
+                                    {% for field in forms.2 %}
+                                    <td>{{field.label}}</td><td>{% render_field field class="form-control" %}</td>
+                                    {% endfor %}
+                                  <td><button type="submit" class="save btn btn-primary"><span class="glyphicon glyphicon-filter"></span>Get Tenant Details</button></td>
+                                  </tr>
+                                 </form> 
+                              </table>  
+                            </div>
+                         </div>
+                       </div>
+                     </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#sumarr"><i class="fa fa-dollar fa-lg"></i> 
+                            ARREARS SUMMARIES</a>
+                        </h4>
+                    </div>
+                    <div id="sumarr" class="panel-collapse collapse">
+                        <div class="panel-body">
+                         <div class="row">
+                            <div class="col-sm-12">
+                              <table class="table">
+                                <form method="POST" class="post-form" id='arr_form'>
+                                  {% csrf_token %}
+                                  <tr>
+                                    {% for field in forms.3 %}
+                                    <td>{{field.label}}</td><td>{% render_field field class="form-control" %}</td>
+                                    {% endfor %}
+                                  <td><button type="submit" class="save btn btn-primary"><span class="glyphicon glyphicon-filter"></span>Retrieve Arrears Summaries</button></td>
+                                  </tr>
+                                 </form> 
+                              </table>  
+                            </div>
+                        </div>  
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+ </div>
+ {% block footer %} 
+   {% include "_footer.html" %}
+ {% endblock %}
+</div>
+
+
+{% endblock %}
+
+{% block scripts %}
+  <script src="{% static 'site/js/nav.js' %}"></script>
+{% endblock %}
+

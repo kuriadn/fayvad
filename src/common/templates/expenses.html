@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% load fayvad %}
+
+{% block title %}{{ block.super }} {{ data.0.heading }} {% endblock %}
+{% block styles %}
+  {{block.super}}
+  <link href="{% static 'site/css/nav.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block navbar-left %}
+  {% include "_navbar.html" with active_link="analysis" %}
+{% endblock %}
+
+{% block navbar-right %}
+  {% if not user.is_authenticated %}
+<a class="btn btn-default" href="{% url 'accounts:login' %}" role="button">Log in</a>
+  {% else %}
+    {{ block.super }}
+  {% endif %}
+{% endblock %}
+ 
+{% block container %}
+{% include "_an_sidenav.html" with active_link="expend" %}
+<div class="main">
+<div class="container profile-head">
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <h2>Expenditure Period <<<b>{{data.0.0}} - {{data.0.1}}</b>>> </h2>
+      </div>
+    </div>
+</div>
+
+<div class="container profile-body">
+  <div class="row">
+    <div class="col-sm-12">
+    <table class="table">
+    {% for dt in data.1 %}
+      <thead>
+        <tr>
+          <th colspan=3 class="text-center"><h3>{{dt.0|title}} Expenses</h3></th>
+        </tr>
+        <tr class="bg-primary">
+          <th>Date Spent</th>
+          <th>Vehicle</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      {% if dt.1|length == 0 %}
+      <thead>
+        <tr class="bg-info">
+          <td colspan=3 class="text-center"><b>No {{dt.0}} Expenses found for the period <<{{data.0.0}} - {{data.0.1}}>></b></td>
+        </tr>
+      </thead>
+      {% else %}
+          <tbody>
+          {% for expense in dt.1 %}
+            <tr class="{% cycle 'odd' 'even'%}">
+              <td>{{expense.date}}</td>
+              <td>{{expense.vehicle}}</td>
+              <td>{{expense.amount}}</td>
+            </tr>
+          {% endfor %}
+            <tr class="bg-success">
+              <td colspan=2>Total {{dt.0}} Expenses</td>
+              <td>{{dt.2}}</td>
+            </tr>
+          </tbody>
+      {% endif %}
+    {% endfor %}
+        <tr class="bg-success">
+          <td colspan=2><b>Overall Expenditure</b></td>
+          <td><b>{{data.2}}</b></td>
+        </tr>
+     </table>
+    </div>
+  </div>
+</div>
+{%block footer%}
+{%include "_footer.html"%}
+{%endblock%}
+</div>
+{% endblock %}

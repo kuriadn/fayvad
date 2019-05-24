@@ -1,0 +1,8 @@
+<li {% if active_link == "home" %}class="active"{% endif %}><a href="{% url 'home' %}">Home</a></li>
+{% if user.is_authenticated %}
+<li {% if active_link == "common" %}class="active"{% endif %}><a href="{% url 'common' %}">Manage Data</a></li>
+  {% if user.is_superuser %}
+  <li {% if active_link == "analysis" %}class="active"{% endif %}><a href="{% url 'transport:analysis' %}" >Analysis</a></li>
+  {% endif %}
+{% endif %}
+<li {% if active_link == "about" %}class="active"{% endif %}><a href="{% url 'about' %}">About</a></li>

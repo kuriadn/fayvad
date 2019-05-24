@@ -1,0 +1,91 @@
+<nav class="navbar navbar-inverse sidebar" role="navigation">
+    <div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="{% url 'home' %}">Fayvad Biz</a>
+		</div>
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li  {% if active_link == "dashboard" %}class="active"{% endif %}><a href="{% url 'common' %}">Dashboard<span style="font-size:14px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-dashboard"></span></a></li>
+				<li class="dropdown {%if '/common/' in data.0.create_url %}active {%elif '/common/' in formset.2 %}active{%endif%}">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Common Bits<span class="caret"></span><span style="font-size:14px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-globe"></span></a>
+					<ul class="dropdown-menu forAnimate" role="menu">
+	                    <li {% if active_link == "position" %}class="active"{% endif %}><a href="{% url 'common:position_list' %}">Positions</a></li>
+	                    <li {% if active_link == "driver" %}class="active"{% endif %}><a href="{% url 'common:driver_list' %}">Drivers</a></li>
+	                    <li {% if active_link == "vehicle" %}class="active"{% endif %}><a href="{% url 'common:vehicle_list' %}">Vehicles</a></li>
+	                    <li {% if active_link == "payment mode" %}class="active"{% endif %}><a href="{% url 'common:paymode_list' %}">Payment Modes</a></li>
+	                    <li {% if active_link == "expense type" %}class="active"{% endif %}><a href="{% url 'common:expensetype_list' %}">Expense Types</a></li>
+	                    <li {% if active_link == "expense" %}class="active"{% endif %}><a href="{% url 'common:expense_list' %}">Expenses</a></li>
+	                    <li {% if active_link == "trip" %}class="active"{% endif %}><a href="{% url 'common:trip_list' %}">Trips</a></li>
+						<li class="divider"></li>
+	                    <li {% if active_link == "expenses" %}class="active"{% endif %}><a href="{% url 'common:add_expenses' %}">Bulk Expenses</a></li>
+	                    <li {% if active_link == "trips" %}class="active"{% endif %}><a href="{% url 'common:add_trips' %}">Bulk Trips</a></li>
+					</ul>
+				</li>
+				<li class="dropdown {%if '/transport/' in data.0.create_url %}active {%elif '/transport/' in formset.2 %}active{%endif%}">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Transport<span class="caret"></span><span style="font-size:14px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-book"></span></a>
+					<ul class="dropdown-menu forAnimate" role="menu">
+	                  <li {% if active_link == "term" %}class="active"{% endif %}><a href=" {% url 'transport:term_list' %}">Terms</a></li>
+	                  <li {% if active_link == "parent" %}class="active"{% endif %}><a href=" {% url 'transport:parent_list' %}">Parents</a></li>
+	                  <li {% if active_link == "zone" %}class="active"{% endif %}><a href=" {% url 'transport:zone_list' %}">Zones</a></li>
+	                  <li {% if active_link == "estate" %}class="active"{% endif %}><a href=" {% url 'transport:estate_list' %}">Estates</a></li>
+	                  <li {% if active_link == "pupil" %}class="active"{% endif %}><a href=" {% url 'transport:pupil_list' %}">Pupils</a></li>
+	                  <li {% if active_link == "rate" %}class="active"{% endif %}><a href=" {% url 'transport:rate_list' %}">Rates</a></li>
+	                  <li {% if active_link == "payment" %}class="active"{% endif %}><a href=" {% url 'transport:payment_list' %}">Payments</a></li>
+	                  <li class="divider"></li>
+	                  <li {% if active_link == "term pupil" %}class="active"{% endif %}><a href=" {% url 'transport:term_pupil_list' %}">Term Pupils</a></li>
+	                  <li {% if active_link == "estate pupil" %}class="active"{% endif %}><a href=" {% url 'transport:estate_pupil_list' %}">Estate Pupils</a></li>
+	                  <!--li class="divider"></li-->
+	                  <li {% if active_link == "pupils" %}class="active"{% endif %}><a href=" {% url 'transport:add_pupils' %}">Bulk Pupils</a></li>
+	                  <li {% if active_link == "rates" %}class="active"{% endif %}><a href=" {% url 'transport:add_rates' %}">Bulk Rates</a></li>
+	                  <li {% if active_link == "estate pupils" %}class="active"{% endif %}><a href=" {% url 'transport:add_est_pupils' %}">Bulk Estate Pupils</a></li>
+	                  <li {% if active_link == "payments" %}class="active"{% endif %}><a href=" {% url 'transport:add_payments' %}">Bulk Payments</a></li>
+                  </ul>
+                </li>
+				<li class="dropdown {%if '/driving/' in data.0.create_url %}active {%elif '/driving/' in formset.2 %}active{%endif%}">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Driving<span class="caret"></span><span style="font-size:14px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-road"></span></a>
+					<ul class="dropdown-menu forAnimate" role="menu">
+	                  <li {% if active_link == "student" %}class="active"{% endif %}><a href=" {% url 'driving:student_list' %}">Students</a></li>
+	                  <li {% if active_link == "class" %}class="active"{% endif %}><a href=" {% url 'driving:class_list' %}">Classes</a></li>
+	                  <li {% if active_link == "tutor" %}class="active"{% endif %}><a href=" {% url 'driving:tutor_list' %}">Tutors</a></li>
+	                  <li {% if active_link == "period" %}class="active"{% endif %}><a href=" {% url 'driving:period_list' %}">Periods</a></li>
+	                  <li {% if active_link == "rate" %}class="active"{% endif %}><a href=" {% url 'driving:rate_list' %}">Rates</a></li>
+	                  <li {% if active_link == "branch" %}class="active"{% endif %}><a href=" {% url 'driving:branch_list' %}">Branch</a></li>
+	                  <li {% if active_link == "stud_enrol" %}class="active"{% endif %}><a href=" {% url 'driving:stud_enrol_list' %}">Students Enrolment</a></li>
+	                  <li {% if active_link == "attendance" %}class="active"{% endif %}><a href=" {% url 'driving:attendance_list' %}">Class Attendance</a></li>
+	                  <li {% if active_link == "payment" %}class="active"{% endif %}><a href=" {% url 'driving:payment_list' %}">Payments</a></li>
+	                  <li {% if active_link == "license" %}class="active"{% endif %}><a href=" {% url 'driving:license_list' %}">Licenses</a></li>
+	                  <li {% if active_link == "discharge" %}class="active"{% endif %}><a href=" {% url 'driving:discharge_list' %}">Discharges</a></li>
+	                  <li {% if active_link == "exam booking" %}class="active"{% endif %}><a href=" {% url 'driving:exambooking_list' %}">Exam Bookings</a></li>
+	                  <li class="divider"></li>
+	                  <li {% if active_link == "payments" %}class="active"{% endif %}><a href=" {% url 'driving:add_payments' %}">Bulk Payments</a></li>
+	                  <li {% if active_link == "rates" %}class="active"{% endif %}><a href=" {% url 'driving:add_rates' %}">Bulk Rates</a></li>
+	                  <li {% if active_link == "attendances" %}class="active"{% endif %}><a href=" {% url 'driving:add_attendance' %}">Bulk Class Attendace</a></li>
+	                  <li {% if active_link == "licenses" %}class="active"{% endif %}><a href=" {% url 'driving:add_licenses' %}">Bulk Licenses</a></li>
+	                  <li {% if active_link == "discharges" %}class="active"{% endif %}><a href=" {% url 'driving:add_discharges' %}">Bulk Discharges</a></li>
+	                  <li {% if active_link == "exam bookings" %}class="active"{% endif %}><a href=" {% url 'driving:add_exam_bookings' %}">Bulk Exam Bookings</a></li>
+                  	</ul>
+              	</li>
+				<li class="dropdown {%if '/rent/' in data.0.create_url %}active {%elif '/rent/' in formset.2 %}active{%endif%}">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Rent<span class="caret"></span><span style="font-size:14px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-bed"></span></a>
+					<ul class="dropdown-menu forAnimate" role="menu">
+	                  <li {% if active_link == "tenant" %}class="active"{% endif %}><a href=" {% url 'rent:tenant_list' %}">Tenants</a></li>
+	                  <li {% if active_link == "room" %}class="active"{% endif %}><a href=" {% url 'rent:room_list' %}">Rooms</a></li>
+	                  <li {% if active_link == "rent regime" %}class="active"{% endif %}><a href=" {% url 'rent:rent_regime_list' %}">Rent Regimes</a></li>
+	                  <li {% if active_link == "room tenant" %}class="active"{% endif %}><a href=" {% url 'rent:roomtenant_list' %}">Room Tenants</a></li>
+	                  <li {% if active_link == "payment" %}class="active"{% endif %}><a href=" {% url 'rent:payment_list' %}">Payments</a></li>
+                      <li class="divider"></li>
+	                  <li {% if active_link == "room tenants" %}class="active"{% endif %}><a href=" {% url 'rent:add_room_tenants' %}">Bulk Room Tenants</a></li>
+                  </ul>
+                </li>
+			</ul>
+		</div>
+	</div>
+</nav>

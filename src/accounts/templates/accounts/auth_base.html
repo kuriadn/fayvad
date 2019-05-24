@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block navbar-left %}
+  {% include "_navbar.html" with active_link="transport" %}
+{% endblock %}
+
+{% block container %}
+<div class="container">
+  <div id="sec1" class="text-page">
+    <div clas="row">
+      <div class="col-sm-12 text-center">
+          <h2>{% block form_heading %}{% endblock %}</h2>
+      </div>
+    </div>
+  </div>
+  {% block form %}
+  {% endblock %}
+</div>
+{% endblock container %}
+

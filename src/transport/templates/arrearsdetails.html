@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% load fayvad %}
+
+{% block title %}{{ block.super }} {{ data.0.heading }} {% endblock %}
+{% block styles %}
+  {{block.super}}
+  <link href="{% static 'site/css/nav.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block navbar-left %}
+  {% include "_navbar.html" with active_link="terms" %}
+{% endblock %}
+
+{% block navbar-right %}
+  {% if not user.is_authenticated %}
+<a class="btn btn-default" href="{% url 'accounts:login' %}" role="button">Log in</a>
+  {% else %}
+    {{ block.super }}
+  {% endif %}
+{% endblock %}
+
+{% block container %}
+{% include "_an_sidenav.html" with active_link="debts" %}
+<div class="main">
+  <div class="container profile-head">
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <h1>Pupil Arrears :: [{{doc_list.2.term}} Term - {{doc_list.2.year}}]</h1>
+      </div>
+    </div>
+  </div>
+
+<div class="container profile-body">
+ <!--div class="row">
+  <div class="col-sm-12 text-right">
+{% if doc_list.0.has_other_pages %}
+  <ul class="pagination">
+    {% if doc_list.0.has_previous %}
+      <li><a href="?page={{ data.1.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in doc_list.0.paginator.page_range %}
+      {% if doc_list.0.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if doc_list.0.has_next %}
+      <li><a href="?page={{ data.1.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}  
+  </div>
+</div-->
+
+  <div class="row">
+    <div class="col-sm-12">
+   {% if doc_list %}
+    <table class="table">
+      <thead class="bg-primary">   
+        <th> Pupil</th>
+        <th> Arrears</th>
+      </thead>
+      <tbody>
+      {% for part in doc_list.0%}
+       <tr class="{% cycle 'odd' 'even' %}">
+         <td>{{ part.0 }}</td>
+         <td>{{ part.1 }}</td>
+       </tr>
+      {% empty %}
+       <tr>
+         <td colspan="2" class="bg-warning">No valid services available for arrears</td>
+       </tr>
+      {% endfor %}
+     </tbody>      
+      <thead class="bg-info">
+         <th>Total Arrears</th>
+         <th>{{ doc_list.1 }}</th>
+       </thead>
+    </table>
+    {% endif %} 
+    </div>
+  </div>
+</div>
+ <div class="row">
+  <div class="col-sm-12 text-center">
+{% if doc_list.0.has_other_pages %}
+  <ul class="pagination">
+    {% if doc_list.0.has_previous %}
+      <li><a href="?page={{ data.1.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in doc_list.0.paginator.page_range %}
+      {% if doc_list.0.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if doc_list.0.has_next %}
+      <li><a href="?page={{ data.1.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}  
+  </div>
+</div>
+{% block footer%}
+{% include "_footer.html" %}
+{% endblock %}
+</div>
+{% endblock %}

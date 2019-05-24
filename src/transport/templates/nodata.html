@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% load fayvad %}
+
+{% block title %} {{ block.super }} {% endblock %}
+{% block styles %}
+  {{block.super}}
+  <link href="{% static 'site/css/nav.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block navbar-left %}
+  {% include "_navbar.html" with active_link="analysis" %}
+{% endblock %}
+
+{% block navbar-right %}
+  {% if not user.is_authenticated %}
+<a class="btn btn-default" href="{% url 'accounts:login' %}" role="button">Log in</a>
+  {% else %}
+    {{ block.super }}
+  {% endif %}
+{% endblock %}
+
+{% block container %}
+{% include "_an_sidenav.html" with active_link="dashboard" %}
+<div class="main">
+<div class="container profile-head">
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <h1>No Data Found!</h1>
+      </div>
+    </div>
+</div>
+
+<div class="container profile-body">
+  <div class="row">
+    <div class="col-sm-12">
+    <table class="table">
+      <thead class="bg-danger">
+        <tr>
+          <th class="text-center"> 
+            <h3>No Data Exists for the request posed! Sorry.</h3>
+          </th>
+        </tr>
+      </thead>
+    </table>
+    </div>
+  </div>
+</div>
+{% block footer %}
+{% include "_footer.html"%}
+{% endblock %}
+</div>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+{% block title %}{{ block.super }} {{ data.0.heading }} {% endblock %}
+{% block styles %}
+  {{block.super}}
+  <link href="{% static 'site/css/nav.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block navbar-left %}
+  {% include "_navbar.html" with active_link=formset.0 %}
+{% endblock %}
+
+{% block navbar-right %}
+  {% if not user.is_authenticated %}
+<a class="btn btn-default" href="{% url 'accounts:login' %}" role="button">Log in</a>
+  {% else %}
+    {{ block.super }}
+  {% endif %}
+{% endblock %}
+
+{% block container %}
+{% include "_sidenav.html" with active_link=formset.0|lower%}
+<div class="main">
+<div class="container profile-head">
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <h1>{{formset.0}} Definition</h1>
+      </div>
+    </div>
+</div>
+{{ formset.non_form_errors }}
+<div class="container profile-body">
+  <div class="row">
+    <div class="col-sm-12">
+      <form role="form" method="post" action="{{formset.2}}">
+         {% csrf_token %}
+         {{ formset.1.management_form }}
+         <table class="table">
+          {% for form in formset.1 %}
+          {% if form.non_field_errors|length > 0 %}
+          <tr class="bg-warning"><td colspan={% widthratio form.fields|length 1 2 %}>{{ form.non_field_errors }}</td></tr>
+          {% endif %}
+          <tr>
+            {% for field in form %}
+            <td>{{field.label}}</td><td>{% render_field field class="form-control" %}</td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </table>
+
+      <br/>
+
+      <button class="btn btn-primary" type="submit" name="submit">Add {{formset.0}}</button>
+      <button class="btn btn-danger" type="reset">Reset</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% block footer %}
+{% include "_footer.html" %}
+{% endblock %}
+</div>
+{% endblock %}
